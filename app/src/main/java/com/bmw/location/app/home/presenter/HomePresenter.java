@@ -7,6 +7,7 @@ import io.realm.RealmResults;
 
 public class HomePresenter {
 
+    public static final String NAME = "name";
     private HomeInterfaceView mView;
 
     public HomePresenter(HomeInterfaceView view) {
@@ -17,7 +18,7 @@ public class HomePresenter {
         Realm realm = Realm.getDefaultInstance();
 
         realm.beginTransaction();
-        RealmResults<LocationData> locationDataList = realm.where(LocationData.class).findAll();
+        RealmResults<LocationData> locationDataList = realm.where(LocationData.class).findAll().sort(NAME);
         realm.commitTransaction();
 
         mView.onLocationsDataLoaded(locationDataList);

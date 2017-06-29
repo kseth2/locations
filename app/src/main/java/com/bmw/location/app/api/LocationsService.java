@@ -19,8 +19,6 @@ public interface LocationsService {
 
     class Factory {
         public static LocationsService create() {
-            // here is where API call will happen
-            // and store and data base
             Gson gson = new GsonBuilder()
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                     .create();
