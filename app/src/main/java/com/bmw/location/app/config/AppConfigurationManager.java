@@ -45,7 +45,10 @@ public final class AppConfigurationManager {
 
         final Realm realm = Realm.getDefaultInstance();
 
+        //do we need it here?
+        realm.beginTransaction();
         final LocationData locationData = realm.where(LocationData.class).findFirst();
+        realm.commitTransaction();
 
         if (locationData != null) {
             mListener.onConfigurationComplete();
@@ -80,7 +83,7 @@ public final class AppConfigurationManager {
 
     public interface ResponseListener {
         /**
-         * This callback is called when configuration is succesfully completed.
+         * This callback is called when configuration is successfully completed.
          */
         void onConfigurationComplete();
 

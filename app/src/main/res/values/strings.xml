@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Locations</string>
+    <string name="error_fetching_data">Unable to get locations data</string>
 </resources>

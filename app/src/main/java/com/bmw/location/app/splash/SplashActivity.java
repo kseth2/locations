@@ -13,7 +13,6 @@ import com.bmw.location.app.home.view.HomeActivity;
 
 public class SplashActivity extends AppCompatActivity implements AppConfigurationManager.ResponseListener {
 
-
     private AppConfigurationManager mManager;
 
     @Override
@@ -39,8 +38,8 @@ public class SplashActivity extends AppCompatActivity implements AppConfiguratio
     public void onConfigurationFail() {
         // toast and retry button
         Context context = getApplicationContext();
-        CharSequence text = "Connection Failure";
-        int duration = Toast.LENGTH_SHORT;
+        CharSequence text = getResources().getString(R.string.error_fetching_data);
+        int duration = Toast.LENGTH_LONG;
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
