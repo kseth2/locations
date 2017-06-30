@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.bmw.location.app.R;
-import com.bmw.location.app.details.DetailsActivity;
+import com.bmw.location.app.details.view.DetailsActivity;
 import com.bmw.location.app.home.adapter.LocationsAdapter;
 import com.bmw.location.app.home.presenter.HomeInterfaceView;
 import com.bmw.location.app.home.presenter.HomePresenter;
@@ -26,13 +29,41 @@ public class HomeActivity extends AppCompatActivity implements HomeInterfaceView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-//        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-//        setSupportActionBar(myToolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         mPresenter = new HomePresenter(this);
-        mPresenter.loadLocationsData();
+        mPresenter.loadLocationsData(HomePresenter.NAME);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.sort_by_name) {
+            mPresenter.loadLocationsData(HomePresenter.NAME);
+            return true;
+        }
+
+        if (id == R.id.sort_by_distance) {
+            //sort by distance
+            return true;
+        }
+
+        if (id == R.id.sort_by_arrival_time) {
+            mPresenter.loadLocationsData(HomePresenter.ARRIVAL_TIME);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
