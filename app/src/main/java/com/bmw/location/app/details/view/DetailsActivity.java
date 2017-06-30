@@ -1,6 +1,7 @@
 package com.bmw.location.app.details.view;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -47,7 +48,9 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             throw new RuntimeException("ID parameter is needed to launch " + TAG);
         }
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolbar);
 
         mPresenter = new DetailsPresenter(this);
         mPresenter.loadLocation(id);

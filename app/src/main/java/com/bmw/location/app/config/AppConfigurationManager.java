@@ -22,8 +22,8 @@ public final class AppConfigurationManager {
      */
     private ResponseListener mListener;
 
+    // private constructor required
     private AppConfigurationManager() {
-        // private constructor required
     }
 
     public static void initialize() {
