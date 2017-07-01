@@ -45,16 +45,6 @@ public final class AppConfigurationManager {
 
         final Realm realm = Realm.getDefaultInstance();
 
-        //do we need it here?
-        realm.beginTransaction();
-        final LocationData locationData = realm.where(LocationData.class).findFirst();
-        realm.commitTransaction();
-
-        if (locationData != null) {
-            mListener.onConfigurationComplete();
-            return;
-        }
-
         final LocationsService service = LocationsService.Factory.create();
 
         service.getLocations().enqueue(new Callback<List<LocationData>>() {
@@ -64,6 +54,10 @@ public final class AppConfigurationManager {
                     List<LocationData> locationDataList = response.body();
 
                     realm.beginTransaction();
+                    final LocationData locationData = realm.where(LocationData.class).findFirst();
+                    if (locationData != null) {
+                        realm.delete(LocationData.class);
+                    }
                     realm.copyToRealmOrUpdate(locationDataList);
                     realm.commitTransaction();
 

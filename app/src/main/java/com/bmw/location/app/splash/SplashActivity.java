@@ -10,6 +10,9 @@ import android.widget.Toast;
 import com.bmw.location.app.R;
 import com.bmw.location.app.config.AppConfigurationManager;
 import com.bmw.location.app.home.view.HomeActivity;
+import com.bmw.location.app.model.LocationData;
+
+import io.realm.Realm;
 
 public class SplashActivity extends AppCompatActivity implements AppConfigurationManager.ResponseListener {
 
@@ -17,6 +20,7 @@ public class SplashActivity extends AppCompatActivity implements AppConfiguratio
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
@@ -36,7 +40,18 @@ public class SplashActivity extends AppCompatActivity implements AppConfiguratio
 
     @Override
     public void onConfigurationFail() {
-        // toast and retry button
+        Realm realm = Realm.getDefaultInstance();
+
+        realm.beginTransaction();
+        final LocationData locationData = realm.where(LocationData.class).findFirst();
+        realm.commitTransaction();
+        if (locationData != null) {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+            return;
+        }
+
+
         Context context = getApplicationContext();
         CharSequence text = getResources().getString(R.string.error_fetching_data);
         int duration = Toast.LENGTH_LONG;
@@ -44,5 +59,11 @@ public class SplashActivity extends AppCompatActivity implements AppConfiguratio
         Toast toast = Toast.makeText(context, text, duration);
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         toast.show();
+        toast.getView().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 1000);
     }
 }
