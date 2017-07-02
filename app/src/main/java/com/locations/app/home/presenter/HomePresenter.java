@@ -19,6 +19,7 @@ public class HomePresenter {
         mView = view;
     }
 
+    // Gets location data from db sorted by sortBy field
     public void loadLocationsData(String sortBy) {
         Realm realm = Realm.getDefaultInstance();
 
@@ -29,9 +30,12 @@ public class HomePresenter {
         mView.onLocationsDataLoaded(locationDataList);
     }
 
+    // Get locations data sorted by distance between current location and locations in db
     public void loadLocationsData(Location currentLocation, String sortBy) {
         Realm realm = Realm.getDefaultInstance();
+
         realm.beginTransaction();
+
         RealmResults<LocationData> locationDataList = realm.where(LocationData.class).findAll();
 
         for (int i = 0; i < locationDataList.size(); i++) {

@@ -73,6 +73,10 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.Loca
     }
 
     public interface OnRecyclerClickListener {
+        /**
+         * Callback to return the detail view when a row is selected
+         * @param id
+         */
         void onLocationClick(long id);
     }
 }

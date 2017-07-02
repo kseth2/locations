@@ -13,6 +13,7 @@ public class DetailsPresenter {
         mView = view;
     }
 
+    // Get locationData from db by id
     public void loadLocation(long id) {
         Realm realm = Realm.getDefaultInstance();
 

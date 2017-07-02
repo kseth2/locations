@@ -41,6 +41,9 @@ public final class AppConfigurationManager {
         mListener = listener;
     }
 
+    /**
+     * Method used for making call to external API and saving data in db
+     */
     public void getAppConfiguration() {
 
         final Realm realm = Realm.getDefaultInstance();
@@ -54,10 +57,14 @@ public final class AppConfigurationManager {
                     List<LocationData> locationDataList = response.body();
 
                     realm.beginTransaction();
+
                     final LocationData locationData = realm.where(LocationData.class).findFirst();
+
+                    // Deleting location data if already present in db
                     if (locationData != null) {
                         realm.delete(LocationData.class);
                     }
+
                     realm.copyToRealmOrUpdate(locationDataList);
                     realm.commitTransaction();
 

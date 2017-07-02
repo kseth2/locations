@@ -48,7 +48,6 @@ public class HomeActivity extends AppCompatActivity implements
 
     private HomePresenter mPresenter;
     private RecyclerView mRecyclerView;
-
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location mLocation;
@@ -65,7 +64,10 @@ public class HomeActivity extends AppCompatActivity implements
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
+        // Setting listener
         mPresenter = new HomePresenter(this);
+
+        // Sets data on presenter sorted by name
         mPresenter.loadLocationsData(HomePresenter.NAME);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -113,6 +115,10 @@ public class HomeActivity extends AppCompatActivity implements
         }
 
         if (id == R.id.sort_by_distance) {
+
+            /* Shows Toast if location is not turned on, otherwise sort by distance between
+             * current location of device and locations from locations API
+             */
             if (mLocation == null) {
                 CharSequence text = getResources().getString(R.string.error_fetching_current_location);
                 int duration = Toast.LENGTH_SHORT;
@@ -126,6 +132,7 @@ public class HomeActivity extends AppCompatActivity implements
             return true;
         }
 
+        // Sort by arrival time returned from locations API
         if (id == R.id.sort_by_arrival_time) {
             mPresenter.loadLocationsData(HomePresenter.ARRIVAL_TIME);
             return true;
@@ -143,6 +150,7 @@ public class HomeActivity extends AppCompatActivity implements
 
     @Override
     public void onLocationClick(long id) {
+        // Starts DetailsActivity when a location is clicked and displays details for that location
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra(ID, id);
         startActivity(intent);
@@ -150,26 +158,22 @@ public class HomeActivity extends AppCompatActivity implements
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        // checks if app has access to Location, otherwise request for it
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermission();
         } else {
+            // Assigns last location to mLocation
             mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
             if (mLocation == null) {
+                // Request for location updates if last location is not present
                 LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-            } else {
-                handleNewLocation(mLocation);
             }
         }
     }
 
     private void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_ACCESS_COARSE_LOCATION);
-    }
-
-    private void handleNewLocation(Location location) {
-        Log.d(TAG, location.toString());
-        mLocation = location;
     }
 
     @Override
@@ -193,6 +197,6 @@ public class HomeActivity extends AppCompatActivity implements
 
     @Override
     public void onLocationChanged(Location location) {
-        handleNewLocation(location);
+        mLocation = location;
     }
 }

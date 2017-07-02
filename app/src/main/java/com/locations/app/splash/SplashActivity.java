@@ -1,6 +1,5 @@
 package com.locations.app.splash;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,13 +26,16 @@ public class SplashActivity extends AppCompatActivity implements AppConfiguratio
         // Getting AppConfigurationManager instance
         mManager = AppConfigurationManager.getInstance();
 
-        // setting listener
+        // Setting listener
         mManager.setOnConfigurationListener(this);
+
+        // Setting up data
         mManager.getAppConfiguration();
     }
 
     @Override
     public void onConfigurationComplete() {
+        // Starts HomeActivity when configuration is complete
         startActivity(new Intent(this, HomeActivity.class));
         finish();
     }
@@ -51,6 +53,7 @@ public class SplashActivity extends AppCompatActivity implements AppConfiguratio
             return;
         }
 
+        // If no existing data present, shows Toast and finishes this activity
         CharSequence text = getResources().getString(R.string.error_fetching_data);
         int duration = Toast.LENGTH_SHORT;
 

@@ -6,6 +6,7 @@ import android.test.mock.MockContext;
 import com.locations.app.model.LocationData;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -31,6 +32,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.powermock.api.mockito.PowerMockito.doCallRealMethod;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
+@Ignore
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Realm.class, RealmConfiguration.class, RealmQuery.class, RealmResults.class, RealmCore.class, RealmLog.class})
 public class DetailsPresenterTest {

@@ -59,10 +59,15 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     public void onLoadLocationSuccess(LocationData locationData) {
         mLocationData = locationData;
+
+        // Setting up map fragment
         setMapFragment();
+
+        // Set toolbar title same as location name
         setToolbarTitle(mLocationData.getName());
 
         try {
+            // Setup data on the view
             setLocationData();
         } catch (ParseException e) {
             Log.e(TAG, e.getMessage(), e);
@@ -81,10 +86,13 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     private void setToolbarTitle(String title) {
         ActionBar actionBar = getSupportActionBar();
+
         if (actionBar == null) {
             Log.d(TAG, "No action bar supported");
             return;
         }
+
+        // Setup toolbar with navigation back enabled
         actionBar.setTitle(title.trim());
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
@@ -110,6 +118,11 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         return true;
     }
 
+    /**
+     * Add marker on the map for the latitude and longitude from locationData
+     *
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         LatLng location = new LatLng(mLocationData.getLatitude(), mLocationData.getLongitude());
