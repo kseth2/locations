@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bmw.location.app.R;
+import com.locations.app.R;
 import com.locations.app.model.LocationData;
 
 import java.util.ArrayList;

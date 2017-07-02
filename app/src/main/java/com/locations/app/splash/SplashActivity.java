@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.bmw.location.app.R;
+import com.locations.app.R;
 import com.locations.app.config.AppConfigurationManager;
 import com.locations.app.home.view.HomeActivity;
 import com.locations.app.model.LocationData;
@@ -50,7 +50,6 @@ public class SplashActivity extends AppCompatActivity implements AppConfiguratio
             finish();
             return;
         }
-
 
         Context context = getApplicationContext();
         CharSequence text = getResources().getString(R.string.error_fetching_data);

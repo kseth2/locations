@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bmw.location.app">
+    package="com.locations.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.locations.app.LocationsApplication"
+        android:name=".LocationsApplication"
         android:allowBackup="false"
         android:icon="@drawable/ic_pin_drop_white_48dp"
         android:label="@string/app_name"
@@ -20,9 +20,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="com.locations.app.home.view.HomeActivity" />
+        <activity android:name=".home.view.HomeActivity" />
         <activity
-            android:name="com.locations.app.splash.SplashActivity"
+            android:name=".splash.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.locations.app.details.view.DetailsActivity" />
+        <activity android:name=".details.view.DetailsActivity" />
     </application>
 
 </manifest>

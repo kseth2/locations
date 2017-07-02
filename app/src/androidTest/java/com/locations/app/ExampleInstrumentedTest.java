@@ -1,4 +1,4 @@
-package com.bmw.location.app;
+package com.locations.app;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

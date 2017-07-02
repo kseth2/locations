@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.bmw.location.app.R;
+import com.locations.app.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.locations.app.details.presenter.DetailsInterfaceView;
 import com.locations.app.details.presenter.DetailsPresenter;
+import com.locations.app.home.view.HomeActivity;
 import com.locations.app.model.LocationData;
 
 import org.joda.time.LocalDateTime;
@@ -27,12 +28,11 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.text.ParseException;
 
-import static com.locations.app.home.view.HomeActivity.ID;
-
 public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback, DetailsInterfaceView {
 
     private static final String TAG = DetailsActivity.class.getSimpleName();
     public static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+    public static final int ZOOM_LEVEL = 15;
 
     private DetailsPresenter mPresenter;
     private LocationData mLocationData;
@@ -43,7 +43,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         setContentView(R.layout.activity_details);
 
         Intent intent = getIntent();
-        long id = intent.getLongExtra(ID, -1L);
+        long id = intent.getLongExtra(HomeActivity.ID, -1L);
         if (id == -1L) {
             throw new RuntimeException("ID parameter is needed to launch " + TAG);
         }
@@ -75,8 +75,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     private void setMapFragment() {
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
@@ -115,6 +114,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap googleMap) {
         LatLng location = new LatLng(mLocationData.getLatitude(), mLocationData.getLongitude());
         googleMap.addMarker(new MarkerOptions().position(location).title(mLocationData.getName()));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, ZOOM_LEVEL));
     }
 }

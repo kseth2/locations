@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.bmw.location.app.R;
+import com.locations.app.R;
 import com.locations.app.details.view.DetailsActivity;
 import com.locations.app.home.adapter.LocationsAdapter;
 import com.locations.app.home.presenter.HomeInterfaceView;
