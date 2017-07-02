@@ -51,11 +51,10 @@ public class SplashActivity extends AppCompatActivity implements AppConfiguratio
             return;
         }
 
-        Context context = getApplicationContext();
         CharSequence text = getResources().getString(R.string.error_fetching_data);
-        int duration = Toast.LENGTH_LONG;
+        int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
+        Toast toast = Toast.makeText(getApplicationContext(), text, duration);
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         toast.show();
         toast.getView().postDelayed(new Runnable() {

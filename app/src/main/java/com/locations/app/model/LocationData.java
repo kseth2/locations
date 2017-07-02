@@ -1,11 +1,14 @@
 package com.locations.app.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class LocationData extends RealmObject {
 
+    @PrimaryKey
     @SerializedName("ID")
     private long id;
 
@@ -23,6 +26,9 @@ public class LocationData extends RealmObject {
 
     @SerializedName("ArrivalTime")
     private String arrivalTime;
+
+    @Expose(serialize = false, deserialize = false)
+    private float distanceFromCurrentLocation;
 
     public long getId() {
         return id;
@@ -72,19 +78,29 @@ public class LocationData extends RealmObject {
         this.arrivalTime = arrivalTime;
     }
 
+    public float getDistanceFromCurrentLocation() {
+        return distanceFromCurrentLocation;
+    }
+
+    public void setDistanceFromCurrentLocation(float distanceFromCurrentLocation) {
+        this.distanceFromCurrentLocation = distanceFromCurrentLocation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        LocationData locationData = (LocationData) o;
+        LocationData that = (LocationData) o;
 
-        if (id != locationData.id) return false;
-        if (Double.compare(locationData.latitude, latitude) != 0) return false;
-        if (Double.compare(locationData.longitude, longitude) != 0) return false;
-        if (!name.equals(locationData.name)) return false;
-        if (!address.equals(locationData.address)) return false;
-        return arrivalTime.equals(locationData.arrivalTime);
+        if (id != that.id) return false;
+        if (Double.compare(that.latitude, latitude) != 0) return false;
+        if (Double.compare(that.longitude, longitude) != 0) return false;
+        if (Float.compare(that.distanceFromCurrentLocation, distanceFromCurrentLocation) != 0)
+            return false;
+        if (!name.equals(that.name)) return false;
+        if (!address.equals(that.address)) return false;
+        return arrivalTime.equals(that.arrivalTime);
 
     }
 
@@ -100,6 +116,7 @@ public class LocationData extends RealmObject {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + address.hashCode();
         result = 31 * result + arrivalTime.hashCode();
+        result = 31 * result + (distanceFromCurrentLocation != +0.0f ? Float.floatToIntBits(distanceFromCurrentLocation) : 0);
         return result;
     }
 
@@ -112,6 +129,7 @@ public class LocationData extends RealmObject {
                 ", longitude=" + longitude +
                 ", address='" + address + '\'' +
                 ", arrivalTime='" + arrivalTime + '\'' +
+                ", distanceFromCurrentLocation=" + distanceFromCurrentLocation +
                 '}';
     }
 }

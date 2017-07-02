@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Locations</string>
     <string name="error_fetching_data">Unable to get locations data</string>
+    <string name="error_fetching_current_location">Current Location not available. \nTurn on Location to use this feature.</string>
     <string name="sort_by_name">Sort by name</string>
     <string name="sort_by_distance">Sort by distance</string>
     <string name="sort_by_arrival_time">Sort by arrival time</string>
