@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="inset">0dp</dimen>
+    <dimen name="view_height">2dp</dimen>
+    <dimen name="padding">8dp</dimen>
+    <dimen name="margin">10dp</dimen>
+    <dimen name="layout_height">56dp</dimen>
+</resources>

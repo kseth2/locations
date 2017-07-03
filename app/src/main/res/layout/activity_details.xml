@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetStartWithNavigation="0dp" />
+        app:contentInsetLeft="@dimen/inset"
+        app:contentInsetStart="@dimen/inset"
+        app:contentInsetStartWithNavigation="@dimen/inset" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin"
             android:layout_weight="1"
             tools:context=".details.view.DetailsActivity" />
 
@@ -36,8 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp">
+            android:paddingEnd="@dimen/padding"
+            android:paddingStart="@dimen/padding">
 
             <TextView
                 android:id="@+id/arrival_time"
